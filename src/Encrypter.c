@@ -15,6 +15,7 @@ typedef struct stored_variable
     int pattern;
     int choice;
 } integer;
+
 //                                                   Initialization Of Main Function
 int main()
 {
@@ -42,6 +43,7 @@ int main()
     }
     return 0;
 }
+
 //                                                      Function To Encrypt The File
 int encrypt()
 {
@@ -100,4 +102,78 @@ int encrypt()
     design(desg.pattern, 40);
     printf("\t\t\tFILE %s Successfully Encrypted !\n", desg.filename);
     return design(desg.pattern, 40);
+}
+
+//                                                              Function To Decrypt The File
+int decrypt()
+{
+    integer desg2;
+    desg2.pattern = 3;
+    int character;
+    FILE *file1, *file2;
+    design(desg2.pattern, 30);
+    printf("\t\t\tENTER THE FILENAME TO DECRYPT:- \n");
+    design(desg2.pattern, 30);
+    scanf("%s", &desg2.filename);
+    system("cls");
+    file1 = fopen(desg2.filename, "r");
+    if (file1 == NULL)
+    {
+        printf("\t\t\t THERE'S NO SUCH FILE WITH NAME \"%s\"\n", desg2.filename);
+        return 0;
+    }
+    file2 = fopen("temporary.txt", "w");
+    if (file2 == NULL)
+    {
+        printf("\t\t\tUnable To Proceed !\n");
+        return 0;
+    }
+    character = fgetc(file1);
+    while (character != EOF)
+    {
+        character = character - 100;
+        fputc(character, file2);
+        character = fgetc(file1);
+    }
+    fclose(file1);
+    fclose(file2);
+
+    file1 = fopen(desg2.filename, "w");
+    if (file1 == NULL)
+    {
+        printf("\t\t\tUnable To Proceed With File\n");
+        return 0;
+    }
+    file2 = fopen("temporary.txt", "r");
+    if (file2 == NULL)
+    {
+        printf("\t\t\tUnable To Proceed \n");
+        return 0;
+    }
+    character = fgetc(file2);
+    while (character != EOF)
+    {
+        fputc(character, file1);
+        character = fgetc(file2);
+    }
+    fclose(file1);
+    fclose(file2);
+    remove("temporary.txt");
+    design(desg2.pattern, 40);
+    printf("\t\t\tFILE %s Successfully Decryypted !\n", desg2.filename);
+    return design(desg2.pattern, 40);
+}
+
+//                                              Function To Print Patterns In Between
+int design(int n, int limit)
+{
+    integer desg3;
+    desg3.pattern = n;
+    int number = limit;
+    printf("\t\t\t");
+    for (int i = 0; i <= limit; i++)
+    {
+        printf("%c", desg3.pattern);
+    }
+    printf("\n");
 }
