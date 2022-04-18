@@ -42,3 +42,62 @@ int main()
     }
     return 0;
 }
+//                                                      Function To Encrypt The File
+int encrypt()
+{
+    FILE *file1, *file2;
+    integer desg;
+    int character;
+    desg.pattern = 2;
+    design(desg.pattern, 30);
+    printf("\t\t\tENTER THE FILENAME TO ENCRYPT:- \n");
+    design(desg.pattern, 30);
+    scanf("%s", &desg.filename);
+    system("cls");
+    file1 = fopen(desg.filename, "r");
+    if (file1 == NULL)
+    {
+        printf("\t\t\tTHERE'S NO SUCH FILE WITH NAME \"%s\"\n", desg.filename);
+        return 0;
+    }
+    file2 = fopen("temporary.txt", "w");
+    if (file2 == NULL)
+    {
+        printf("\t\t\tUnable To Proceed !\n");
+        return 0;
+    }
+    character = fgetc(file1);
+    while (character != EOF)
+    {
+        character = character + 100;
+        fputc(character, file2);
+        character = fgetc(file1);
+    }
+    fclose(file1);
+    fclose(file2);
+
+    file1 = fopen(desg.filename, "w");
+    if (file1 == NULL)
+    {
+        printf("\t\t\tUnable To Proceed With File\n");
+        return 0;
+    }
+    file2 = fopen("temporary.txt", "r");
+    if (file2 == NULL)
+    {
+        printf("\t\t\tUnable To Proceed \n");
+        return 0;
+    }
+    character = fgetc(file2);
+    while (character != EOF)
+    {
+        fputc(character, file1);
+        character = fgetc(file2);
+    }
+    fclose(file1);
+    fclose(file2);
+    remove("temporary.txt");
+    design(desg.pattern, 40);
+    printf("\t\t\tFILE %s Successfully Encrypted !\n", desg.filename);
+    return design(desg.pattern, 40);
+}
