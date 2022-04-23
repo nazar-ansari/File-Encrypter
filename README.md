@@ -6,6 +6,7 @@
 
 - `This Encryption Program Is Written and Compiled in ` _**C**_ `Language` **.**
 - `This Program Converts Your` _**Plain Text**_ `File in` _**Cipher Text**_ `by manipulating Character's ASCII`**.**
+### ` ⚠️You May Download The` _**WINDOWS**_ `Executable File From` [HERE](https://github.com/nazar-ansari/File-Encrypter/raw/main/Executable.exe) **.**
  <hr>
  <h3>Preview ⬇️:<h3>
 
